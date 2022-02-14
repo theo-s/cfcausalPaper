@@ -8,6 +8,7 @@ method_labels <- c("Causal Forest", "X-learner", "BART", "CQR-RF", "CQR-Boosting
 
 ## Coverage of CATE
 res$tau %>%
+    filter(!is.na(method)) %>%
     mutate(d = factor(d,
                       levels = c(10, 100),
                       labels = c("d = 10",

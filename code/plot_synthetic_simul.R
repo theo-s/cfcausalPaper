@@ -31,7 +31,8 @@ res$tau %>%
     coord_flip() +
     theme_bw() +
     theme(panel.grid = element_blank(),
-          strip.text = element_text(size = 15))
+          strip.text = element_text(size = 15))+
+    labs(title = "CATE Simulation Updated")
 
 ggsave("figs/simul_synthetic_coverage_tau_paper.pdf", last_plot(),
        width = 9, height = 6)

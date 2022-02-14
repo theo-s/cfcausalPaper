@@ -1,12 +1,12 @@
 library("tidyverse")
 
-params <- read.table("../jobs/simul_synthetic_params.txt")
+params <- read.table("jobs/simul_synthetic_params.txt")
 
 res_tau <- list()
 res_Y <- list()
 res_cond <- list()
 for (i in 1:nrow(params)){
-    filename <- paste0("../raw_data_cluster/synthetic_simul",
+    filename <- paste0("raw_data_cluster/synthetic_simul",
                        "_n", params[i, 1],
                        "_d", params[i, 2],
                        "_seed", params[i, 3],
@@ -40,4 +40,4 @@ res_Y <- do.call(rbind, res_Y)
 res_cond <- do.call(rbind, res_cond)
 
 res <- list(tau = res_tau, Y = res_Y, cond = res_cond)
-save(res, file = "../data/simul_synthetic_results.RData")
+save(res, file = "data/simul_synthetic_results.RData")

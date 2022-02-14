@@ -1,13 +1,13 @@
 library("tidyverse")
 library("ggplot2")
 
-load("../data/simul_synthetic_results.RData")
+load("data/simul_synthetic_results.RData")
 
 method_levels <- c("CF", "xlearner", "bart", "CQR-quantRF", "CQR-quantBoosting", "CQR-quantBART")
 method_labels <- c("Causal Forest", "X-learner", "BART", "CQR-RF", "CQR-Boosting", "CQR-BART")
 
 ## Coverage of CATE
-res$tau %>% 
+res$tau %>%
     mutate(d = factor(d,
                       levels = c(10, 100),
                       labels = c("d = 10",
@@ -26,13 +26,13 @@ res$tau %>%
     facet_grid(d ~ exprid) +
     geom_hline(yintercept = 0.95, color = "red") +
     ylim(c(0, 1)) +
-    xlab("Method") + ylab("Empirical Coverage of CATE (alpha = 0.05)") + 
+    xlab("Method") + ylab("Empirical Coverage of CATE (alpha = 0.05)") +
     coord_flip() +
     theme_bw() +
     theme(panel.grid = element_blank(),
           strip.text = element_text(size = 15))
 
-ggsave("../figs/simul_synthetic_coverage_tau_paper.pdf", last_plot(),
+ggsave("figs/simul_synthetic_coverage_tau_paper.pdf", last_plot(),
        width = 9, height = 6)
 
 ## Coverage of ITE
@@ -55,7 +55,7 @@ res$Y %>%
     facet_grid(d ~ exprid) +
     geom_hline(yintercept = 0.95, color = "red") +
     ylim(c(0, 1)) +
-    xlab("Method") + ylab("Empirical Coverage of Y(1)-Y(0) (alpha = 0.05)") + 
+    xlab("Method") + ylab("Empirical Coverage of Y(1)-Y(0) (alpha = 0.05)") +
     coord_flip() +
     theme_bw() +
     theme(panel.grid = element_blank(),
@@ -82,9 +82,9 @@ res$Y %>%
     ggplot(aes(x = method, y = len)) +
     geom_boxplot() +
     facet_grid(d ~ exprid) +
-    geom_hline(yintercept = 3.92, color = "blue") +    
+    geom_hline(yintercept = 3.92, color = "blue") +
     xlab("Method") + ylab("Average Length of Interval estimates of Y(1)-Y(0) (alpha = 0.05)") +
-    expand_limits(y = 0) + 
+    expand_limits(y = 0) +
     coord_flip() +
     theme_bw() +
     theme(panel.grid = element_blank(),
@@ -126,7 +126,7 @@ res$cond %>%
     theme_bw() +
     theme(panel.grid = element_blank(),
           strip.text = element_text(size = 12.5))
-    
+
 ggsave("../figs/simul_synthetic_cond_d10_tau_paper.pdf", last_plot(),
        width = 11, height = 6.5)
 
@@ -161,7 +161,7 @@ res$cond %>%
     theme_bw() +
     theme(panel.grid = element_blank(),
           strip.text = element_text(size = 12.5))
-    
+
 ggsave("../figs/simul_synthetic_cond_d100_tau_paper.pdf", last_plot(),
        width = 11, height = 6.5)
 
@@ -196,7 +196,7 @@ res$cond %>%
     theme_bw() +
     theme(panel.grid = element_blank(),
           strip.text = element_text(size = 12.5))
-    
+
 ggsave("../figs/simul_synthetic_cond_d10_std_paper.pdf", last_plot(),
        width = 11, height = 4)
 
@@ -231,6 +231,6 @@ res$cond %>%
     theme_bw() +
     theme(panel.grid = element_blank(),
           strip.text = element_text(size = 12.5))
-    
+
 ggsave("../figs/simul_synthetic_cond_d100_std_paper.pdf", last_plot(),
        width = 11, height = 4)

@@ -10,7 +10,7 @@ if (!interactive()){
 
     parser$add_argument("--n", type = "integer", default = 1000, help = "Sample size")
     parser$add_argument("--d", type = "integer", default = 10, help = "Dimension")
-    parser$add_argument("--B", type = "integer", default = 0, help = "Nrep for Xlearner")
+    parser$add_argument("--B", type = "integer", default = 1000, help = "Nrep for Xlearner")
     parser$add_argument("--seed", type = "double", default = 1, help = "random seed")
     
     args <- parser$parse_args()

@@ -41,16 +41,16 @@ CF_Cf_CI <- function(X, Y, T, Xtest){
 
 ## Get counterfactual intervals by X-learner
 xlearner_Cf_CI <- function(X, Y, T, Xtest,
-                           B = 50){
+                           B = 1000){
     if (B == 0){
         df_tau <- df_Y <- list(cr = NA, len = NA)
         return(list(tau = df_tau, Y1 = df_Y))
     }
 
-    xl_rf <- causalToolbox::X_RF(feat = X, tr = T, yobs = Y, nthread = 1)
+    xl_rf <- causalToolbox::X_RF(feat = X, tr = T, yobs = Y, nthread = 0)
     cate_esti_rf <- causalToolbox::EstimateCate(xl_rf, Xtest)
     CI <- causalToolbox::CateCI(xl_rf, Xtest, B = B,
-                                verbose = FALSE, nthread = 1)[, 2:3]
+                                verbose = FALSE, nthread = 0)[, 2:3]
     return(list(tau = CI, Y = CI))
 }
 
@@ -178,7 +178,6 @@ Cf_expr <- function(n, d, ntest,
     }
 
     ## BART
-    Y[T == 0] <- NA
     bart_CI <- try(bart_Cf_CI(X, Y, Xtest))
     if (class(bart_CI) != "try-error"){
         df_tau <- summary_CI(tautest, bart_CI$tau)

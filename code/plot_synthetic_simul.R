@@ -34,7 +34,7 @@ res$tau %>%
           strip.text = element_text(size = 15))+
     labs(title = "CATE Simulation Updated")
 
-ggsave("figs/simul_synthetic_coverage_tau_paper.pdf", last_plot(),
+ggsave("figs/CATE_plot_updated.pdf", last_plot(),
        width = 9, height = 6)
 
 ## Coverage of ITE
